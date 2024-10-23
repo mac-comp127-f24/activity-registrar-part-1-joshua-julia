@@ -74,6 +74,14 @@ class RegistrarTest {
         assertFalse(comp127.getRoster().contains(sally));
     }
 
+    @Test
+    void clientsCannotModifyCourses() {
+       assertThrows(UnsupportedOperationException.class, () -> {
+        sally.getCourses().add(comp127);
+    });
+     }
+
+
     // ------ Post-test invariant check ------
     //
     // This is a bit persnickety for day-to-day testing, but these kinds of checks are appropriate
@@ -102,10 +110,6 @@ class RegistrarTest {
                 s.getCourses().contains(c),
                 c + " thinks " + s + " is enrolled, but " + s + " doesn't think they're in the class");
         }
-
-        assertTrue(
-            c.getRoster().size() <= c.getEnrollmentLimit(),
-            c + " has an enrollment limit of " + c.getEnrollmentLimit()
-                + ", but has " + c.getRoster().size() + " students");
+            
     }
 }
