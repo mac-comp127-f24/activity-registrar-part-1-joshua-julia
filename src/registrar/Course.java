@@ -3,6 +3,8 @@ package registrar;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Collections;
+
 
 /**
  * A course that can enroll students.
@@ -15,6 +17,7 @@ public class Course {
     private final String title;
     private List<Student> roster = new ArrayList<>();
     private int enrollmentLimit = UNLIMITED_ENROLLMENT;
+
 
     public Course(String catalogNumber, String title) {
         this.catalogNumber = Objects.requireNonNull(catalogNumber, "catalogNumber");
@@ -51,7 +54,7 @@ public class Course {
      * Returns all students currently enrolled in this course.
      */
     public List<Student> getRoster() {
-        return roster;
+        return Collections.unmodifiableList(roster);
     }
 
     // 👋 Note that this method isn’t public! 👋

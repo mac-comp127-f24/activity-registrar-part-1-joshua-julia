@@ -76,10 +76,21 @@ class RegistrarTest {
 
     @Test
     void clientsCannotModifyCourses() {
-       assertThrows(UnsupportedOperationException.class, () -> {
-        sally.getCourses().add(comp127);
-    });
-     }
+        assertThrows(UnsupportedOperationException.class, () -> {
+            List<Course> courses = sally.getCourses();
+            courses.add(comp127);
+        });
+    }
+
+
+    @Test
+    void clientsCannotModifyRoster() {
+        assertThrows(UnsupportedOperationException.class, () -> {
+            List<Student> roster = comp127.getRoster();
+            roster.add(sally);
+        });
+     
+    }
 
 
     // ------ Post-test invariant check ------
